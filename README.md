@@ -22,3 +22,23 @@ AWS AI Foundational Exam Preparation
 
 ### Notebook
 See `caip_01_01/caip_week1_call1.ipynb` for code examples and visualizations.
+
+## Week 01 - Call 02: How Good Is Your Model?
+
+### Topics Covered
+- Model evaluation metrics: accuracy, precision, recall, F1 score
+- Confusion matrix interpretation (raw and normalized)
+- Why accuracy alone can be misleading, especially with imbalanced datasets
+- Real-world decision-making: false positives vs false negatives
+- Business context example: gun detection on Facebook Marketplace
+
+### Hands-On Work
+- Worked with Titanic dataset (Kaggle) - binary classification (survived/did not survive)
+- Data cleaning: handling missing values, encoding categorical features
+- Trained Decision Tree and Random Forest models
+- Computed and compared metrics: accuracy, precision, recall, F1 score
+- Visualized confusion matrices (raw counts and normalized)
+- Interpreted classification reports and model performance
+
+### Notebook
+See `caip_01_02/caip_week1_call2.ipynb` for code examples and visualizations.
