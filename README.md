@@ -42,3 +42,7 @@ See `caip_01_01/caip_week1_call1.ipynb` for code examples and visualizations.
 
 ### Notebook
 See `caip_01_02/caip_week1_call2.ipynb` for code examples and visualizations.
+
+### Python Scripts
+- **`caip_01_02/xgboost_model.py`**: XGBoost model implementation with 80/20 train/test split, confusion matrix, and classification report
+- **`caip_01_02/optimized_model.py`**: Hyperparameter tuning script using RandomizedSearchCV for both XGBoost and Random Forest models. Automatically selects the best performing model and provides detailed evaluation metrics including cross-validation scores and feature importance.
