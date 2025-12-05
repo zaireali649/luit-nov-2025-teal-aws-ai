@@ -123,4 +123,49 @@ See `caip_02_02/caip_week2_call2.ipynb` for endpoint deployment and testing exam
 - **Provisioned Throughput Warning**: Avoid for learning - charges by hour regardless of usage
 
 ### Notebook
-See `caip_03_01/caip_week3_call1.ipynb` for conceptual overview and learning objectives. Hands-on implementation will be covered in `caip_03_02`.
+See `caip_03_01/caip_week3_call1.ipynb` for conceptual overview and learning objectives.
+
+## Week 03 - Call 02: AWS Bedrock API Integration and Error Handling
+
+### Topics Covered
+- Bedrock Runtime client vs Bedrock client: when to use each
+- Constructing request bodies for Claude models on Bedrock
+- Request body format: `anthropic_version`, `max_tokens`, `messages` structure
+- Invoking Bedrock models programmatically using `invoke_model()`
+- Response parsing: extracting text from Bedrock API responses
+- ThrottlingException: understanding rate limits and why they occur
+- Exponential backoff retry logic for handling throttling
+- Rate limiting strategies: adding delays between API calls
+- Prompt templates for batch processing multiple requests
+- Error handling best practices for production API integrations
+
+### Hands-On Work
+- Created Bedrock runtime client using `boto3.client('bedrock-runtime')`
+- Built `construct_body()` function to format requests for Claude models
+- Implemented `call_bedrock()` function for model invocation and response parsing
+- Experienced ThrottlingException when processing 50 US states sequentially
+- Implemented exponential backoff retry logic (`call_bedrock_with_retry()`)
+- Added rate limiting with `time.sleep()` between requests
+- Used prompt templates with placeholders for batch processing
+- Processed all 50 US states to collect state flower data
+- Parsed JSON responses from Bedrock API
+- Saved structured data to JSON file
+
+### Key Learnings
+- **Critical distinction**: Use `bedrock-runtime` client for inference, not `bedrock` client
+- **Request format**: Body must be JSON string (`json.dumps()`), include `anthropic_version: "bedrock-2023-05-31"`
+- **Response parsing**: `response["body"].read()` returns bytes, must parse with `json.loads()`
+- **Throttling is normal**: Even legitimate usage can trigger rate limits - always implement retry logic
+- **Exponential backoff**: Formula `(2 ** attempt) + random.uniform(0, 1)` provides effective retry strategy
+- **Rate limiting**: Always add delays (`time.sleep(1)`) between requests in loops
+- **Production readiness**: Retry logic and rate limiting are essential for production code
+
+### Notebook
+See `caip_03_02/caip_week3_call2.ipynb` for hands-on implementation and error handling examples.
+
+### Files
+- **`caip_03_02/call_bedrock.py`**: Core functions for constructing request bodies and calling Bedrock models
+- **`caip_03_02/run_bedrock.py`**: Batch processing script with retry logic and rate limiting for processing 50 US states
+- **`caip_03_02/prompt_template.txt`**: Template with placeholders for structured JSON output requests
+- **`caip_03_02/throttling_explanation.md`**: Detailed explanation of ThrottlingException encountered during batch processing
+- **`caip_03_02/flower_data.json`**: Output file containing state flower data collected from Bedrock API
